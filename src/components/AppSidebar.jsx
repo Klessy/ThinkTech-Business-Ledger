@@ -61,6 +61,8 @@ function AppSidebar() {
         //     label: "Reports",
         //   },
 
+        
+
             {
                 key: "1",
                 label: (
@@ -70,8 +72,18 @@ function AppSidebar() {
                     )
             },
 
+            
             {
-            key: "2",
+              key: "2",
+              label: (
+                <Link to="/transactions">
+                  Transactions
+                </Link>
+            ),
+          },
+
+            {
+            key: "3",
             label: (
                 <Link to="/sales">
                 Sales
@@ -80,7 +92,7 @@ function AppSidebar() {
             },
 
             {
-            key: "3",
+            key: "4",
             label: (
                 <Link to="/expenses">
                 Expenses
@@ -89,7 +101,7 @@ function AppSidebar() {
             },
 
             {
-            key: "4",
+            key: "5",
             label: (
                 <Link to="/reports">
                 Reports

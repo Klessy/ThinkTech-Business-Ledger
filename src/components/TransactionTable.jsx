@@ -1,51 +1,4 @@
-// import { Table, Tag } from "antd";
 
-// function TransactionTable({ transactions }) {
-//   const columns = [
-//     {
-//       title: "Date",
-//       dataIndex: "date",
-//     },
-
-//     {
-//       title: "Description",
-//       dataIndex: "description",
-//     },
-
-//     {
-//       title: "Type",
-//       dataIndex: "type",
-//       render: (value) => (
-//         <Tag
-//           color={
-//             value === "Income"
-//               ? "green"
-//               : "red"
-//           }
-//         >
-//           {value}
-//         </Tag>
-//       ),
-//     },
-
-//     {
-//       title: "Amount",
-//       dataIndex: "amount",
-//       render: (value) =>
-//         `₦${value.toLocaleString()}`,
-//     },
-//   ];
-
-//   return (
-//     <Table
-//       columns={columns}
-//       dataSource={transactions}
-//       rowKey="id"
-//     />
-//   );
-// }
-
-// export default TransactionTable;
 
 import { useState } from "react";
 import {
@@ -79,15 +32,11 @@ function TransactionTable({ transactions }) {
   //   }
   // );
 
-const filteredData = [...transactions]
+  const filteredData = [...transactions]
   .sort(
     (a, b) =>
-      new Date(
-        b.createdAt || b.date
-      ) -
-      new Date(
-        a.createdAt || a.date
-      )
+      new Date(a.date) -
+      new Date(b.date)
   )
   .filter((item) => {
     const matchSearch =
@@ -106,66 +55,92 @@ const filteredData = [...transactions]
     );
   });
 
+// const filteredData = [...transactions]
+//   .sort(
+//     (a, b) =>
+//       new Date(
+//         b.createdAt || b.date
+//       ) -
+//       new Date(
+//         a.createdAt || a.date
+//       )
+//   )
+//   .filter((item) => {
+//     const matchSearch =
+//       item.description
+//         .toLowerCase()
+//         .includes(searchText.toLowerCase());
 
-const chronologicalData =
-  [...transactions].sort(
-    (a, b) =>
-      new Date(a.date) -
-      new Date(b.date)
-  );
+//     const matchFilter =
+//       filterType === "All"
+//         ? true
+//         : item.type === filterType;
 
-let runningBalance = 0;
-
-const balanceMap = {};
-
-chronologicalData.forEach(
-  (item) => {
-    if (
-      item.type === "Income"
-    ) {
-      runningBalance +=
-        item.amount;
-    } else {
-      runningBalance -=
-        item.amount;
-    }
-
-    balanceMap[item.id] =
-      runningBalance;
-  }
-);
-
-const tableData =
-  filteredData.map((item) => ({
-    ...item,
-    balance:
-      balanceMap[item.id] || 0,
-  }));
+//     return (
+//       matchSearch &&
+//       matchFilter
+//     );
+//   });
 
 
+// const chronologicalData =
+//   [...transactions].sort(
+//     (a, b) =>
+//       new Date(a.date) -
+//       new Date(b.date)
+//   );
 
-//   const tableData = filteredData.map(
-//   (item, index) => {
-//     let runningBalance = 0;
+// let runningBalance = 0;
 
-//     for (let i = 0; i <= index; i++) {
-//       if (
-//         filteredData[i].type === "Income"
-//       ) {
-//         runningBalance +=
-//           filteredData[i].amount;
-//       } else {
-//         runningBalance -=
-//           filteredData[i].amount;
-//       }
+// const balanceMap = {};
+
+// chronologicalData.forEach(
+//   (item) => {
+//     if (
+//       item.type === "Income"
+//     ) {
+//       runningBalance +=
+//         item.amount;
+//     } else {
+//       runningBalance -=
+//         item.amount;
 //     }
 
-//     return {
-//       ...item,
-//       balance: runningBalance,
-//     };
+//     balanceMap[item.id] =
+//       runningBalance;
 //   }
 // );
+
+// const tableData =
+//   filteredData.map((item) => ({
+//     ...item,
+//     balance:
+//       balanceMap[item.id] || 0,
+//   }));
+
+
+  const tableData = filteredData.map(
+  (item, index) => {
+    let runningBalance = 0;
+
+    for (let i = 0; i <= index; i++) {
+      if (
+        filteredData[i].type === "Income"
+      ) {
+        runningBalance +=
+          filteredData[i].amount;
+      } else {
+        runningBalance -=
+          filteredData[i].amount;
+      }
+    }
+
+    return {
+      ...item,
+      balance: runningBalance,
+    };
+  }
+);
 
   const columns = [
     {

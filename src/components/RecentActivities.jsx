@@ -1,30 +1,55 @@
-import { Card, List } from "antd";
+import { Card, List, Tag } from "antd";
 
-function TopExpenses({
+function RecentActivities({
   transactions,
 }) {
-  const topExpenses =
-    transactions
-      .filter(
-        (item) =>
-          item.type === "Expense"
-      )
+  const recentActivities =
+    [...transactions]
       .sort(
         (a, b) =>
-          b.amount - a.amount
+          new Date(
+            b.createdAt || b.date
+          ) -
+          new Date(
+            a.createdAt || a.date
+          )
       )
       .slice(0, 5);
 
   return (
-    <Card title="Top Expenses">
+    <Card title="Recent Activities">
       <List
-        dataSource={topExpenses}
+        dataSource={
+          recentActivities
+        }
         renderItem={(item) => (
           <List.Item>
-            {item.description}
-            {" - "}
-            ₦
-            {item.amount.toLocaleString()}
+            <List.Item.Meta
+              title={
+                item.description
+              }
+              description={
+                item.date
+              }
+            />
+
+            <div>
+              <Tag
+                color={
+                  item.type ===
+                  "Income"
+                    ? "green"
+                    : "red"
+                }
+              >
+                {item.type}
+              </Tag>
+
+              <strong>
+                ₦
+                {item.amount.toLocaleString()}
+              </strong>
+            </div>
           </List.Item>
         )}
       />
@@ -32,4 +57,4 @@ function TopExpenses({
   );
 }
 
-export default TopExpenses;
+export default RecentActivities;

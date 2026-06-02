@@ -1,11 +1,30 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import sampleData from "../data/data";
 
 const LedgerContext = createContext();
 
 export function LedgerProvider({ children }) {
+  // const [transactions, setTransactions] =
+  //   useState(sampleData);
+
   const [transactions, setTransactions] =
-    useState(sampleData);
+  useState(() => {
+    const savedData =
+      localStorage.getItem(
+        "ledgerTransactions"
+      );
+
+    return savedData
+      ? JSON.parse(savedData)
+      : sampleData;
+  });
+
+  useEffect(() => {
+  localStorage.setItem(
+    "ledgerTransactions",
+    JSON.stringify(transactions)
+  );
+}, [transactions]);
 
   return (
     <LedgerContext.Provider

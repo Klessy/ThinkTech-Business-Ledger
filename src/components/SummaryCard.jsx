@@ -1,40 +1,4 @@
-// import { Card, Row, Col } from "antd";
 
-// function SummaryCards({ transactions }) {
-//   const income = transactions
-//     .filter((t) => t.type === "Income")
-//     .reduce((acc, item) => acc + item.amount, 0);
-
-//   const expense = transactions
-//     .filter((t) => t.type === "Expense")
-//     .reduce((acc, item) => acc + item.amount, 0);
-
-//   const balance = income - expense;
-
-//   return (
-//     <Row gutter={16} style={{ marginBottom: 20 }}>
-//       <Col span={8}>
-//         <Card title="Total Income">
-//           ₦{income.toLocaleString()}
-//         </Card>
-//       </Col>
-
-//       <Col span={8}>
-//         <Card title="Total Expense">
-//           ₦{expense.toLocaleString()}
-//         </Card>
-//       </Col>
-
-//       <Col span={8}>
-//         <Card title="Balance">
-//           ₦{balance.toLocaleString()}
-//         </Card>
-//       </Col>
-//     </Row>
-//   );
-// }
-
-// export default SummaryCards;
 
 import { Card, Row, Col, Statistic } from "antd";
 import {
