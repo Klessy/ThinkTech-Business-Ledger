@@ -56,6 +56,8 @@ function DashboardCharts({ transactions }) {
             width="100%"
             height={300}
           >
+         
+
             <LineChart data={salesData}>
               <CartesianGrid strokeDasharray="3 3" />
 
@@ -101,6 +103,50 @@ function DashboardCharts({ transactions }) {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
+             <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "20px",
+                marginTop: "10px",
+              }}
+            >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <div
+                style={{
+                  width: 14,
+                  height: 14,
+                  backgroundColor: "#52c41a",
+                  borderRadius: 2,
+                }}
+              />
+              <span>Income</span>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <div
+                style={{
+                  width: 14,
+                  height: 14,
+                  backgroundColor: "#ff4d4f",
+                  borderRadius: 2,
+                }}
+            />
+            <span>Expense</span>
+          </div>
+          </div>
         </Card>
       </Col>
     </Row>

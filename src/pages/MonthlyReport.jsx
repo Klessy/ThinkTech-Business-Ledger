@@ -17,6 +17,8 @@ function MonthlyReport() {
       );
     });
 
+    // const monthlyTransactions = transactions;
+
   const totalSales = monthlyTransactions
     .filter((item) => item.type === "Income")
     .reduce(

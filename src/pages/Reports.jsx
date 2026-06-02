@@ -8,8 +8,11 @@ import {
 import DailyReport from "./DailyReport";
 import MonthlyReport from "./MonthlyReport";
 import exportExcel from "../utility/Excel";
+import { useLedger } from "../context/LedgerContext";
 
 function Reports() {
+   const { transactions } = useLedger();
+   
   return (
     <>
       <Row gutter={20}>
