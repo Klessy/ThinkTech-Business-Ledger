@@ -7,11 +7,18 @@ import {
   Input,
   Select,
   Space,
+  Button,
+  Popconfirm,
+  message,
 } from "antd";
+
+import {
+  DeleteOutlined,
+} from "@ant-design/icons";
 
 const { Search } = Input;
 
-function TransactionTable({ transactions }) {
+function TransactionTable({ transactions, setTransactions }) {
   const [searchText, setSearchText] = useState("");
   const [filterType, setFilterType] =
     useState("All");
@@ -142,6 +149,18 @@ function TransactionTable({ transactions }) {
   }
 );
 
+const handleDelete = (id) => {
+  setTransactions(
+    transactions.filter(
+      (item) => item.id !== id
+    )
+  );
+
+  message.success(
+    "Transaction deleted"
+  );
+};
+
   const columns = [
     {
       title: "Date",
@@ -204,9 +223,33 @@ function TransactionTable({ transactions }) {
           ₦{value.toLocaleString()}
         </strong>
       ),
-}
+    },
+
+    {
+      title: "Actions",
+      key: "actions",
+
+      render: (_, record) => (
+        <Space>
+          <Popconfirm
+            title="Delete transaction?"
+            description="This action cannot be undone."
+            okText="Delete"
+            cancelText="Cancel"
+            onConfirm={() =>
+              handleDelete(record.id)
+            }
+          >
+           <Button
+            danger
+            size="small"
+            icon={<DeleteOutlined />}
+          />
+          </Popconfirm>
+        </Space>
+      ),
+    }
     
-  
   ];
 
   return (

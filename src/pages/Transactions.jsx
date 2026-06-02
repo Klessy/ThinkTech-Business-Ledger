@@ -28,6 +28,7 @@ function Transactions() {
         <Col xs={24} lg={16}>
           <TransactionTable
             transactions={transactions}
+            setTransactions={setTransactions}
           />
         </Col>
       </Row>
